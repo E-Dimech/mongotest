@@ -27,6 +27,22 @@ app.get("/", (req, res) => {
   `);
 });
 
+app.set("views", path.join(__dirname, "/views/"));
+
+//handlebars allows you to separate content from layout
+
+app.engine(
+  "hbs",
+  exphbs({
+    handlebars: allowInsecurePrototypeAccess(handlebars),
+    extname: "hbs",
+    defaultLayout: "MainLayout",
+    layoutsDir: __dirname + "/views/layouts/",
+  })
+);
+
+app.set("view engine", "hbs");
+
 app.listen(3000, () => {
   console.log("Server started at port 3000");
 });
